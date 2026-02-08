@@ -10,11 +10,11 @@ const Sidebar = ({ sidebar, setSidebar }) => {
     >
       <div className="my-7 w-full">
         <img
-          src={user.imageUrl}
+          src={user?.imageUrl}
           alt="user image"
           className="w-13 rounded-full mx-auto"
         />
-        <h1 className="mt-1 text-center">{user.fullName}</h1>
+        <h1 className="mt-1 text-center">{user?.fullName}</h1>
       </div>
     </div>
   );
