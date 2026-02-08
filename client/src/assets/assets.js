@@ -2,9 +2,11 @@ import {
   Eraser,
   FileText,
   Hash,
+  House,
   Image,
   Scissors,
   SquarePen,
+  Users,
 } from "lucide-react";
 import ai_gen_img_1 from "./ai_gen_img_1.png";
 import ai_gen_img_2 from "./ai_gen_img_2.png";
@@ -190,4 +192,15 @@ export const dummyPublishedCreationData = [
     updated_at: "2025-06-23T11:29:44.434Z",
     __v: 1,
   },
+];
+
+export const navItems = [
+  { to: "/ai", label: "Dashboard", Icon: House },
+  { to: "/ai/write-article", label: "Write Article", Icon: SquarePen },
+  { to: "/ai/blog-titles", label: "Blog Titles", Icon: Hash },
+  { to: "/ai/generate-images", label: "Generate Images", Icon: Image },
+  { to: "/ai/remove-background", label: "Remove Background", Icon: Eraser },
+  { to: "/ai/remove-object", label: "Remove Object", Icon: Scissors },
+  { to: "/ai/review-resume", label: "Review Resume", Icon: FileText },
+  { to: "/ai/community", label: "Community", Icon: Users },
 ];
