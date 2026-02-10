@@ -20,7 +20,7 @@ const Sidebar = ({ sidebar, setSidebar }) => {
         <h1 className="mt-1 text-center">{user?.fullName}</h1>
 
         {/* nav items */}
-        <div className="">
+        <div className="px-6 mt-5 text-sm text-gray-600 font-medium">
           {navItems.map(({ to, label, Icon }) => (
             <NavLink
               key={to}
