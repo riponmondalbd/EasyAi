@@ -1,10 +1,8 @@
-import { useUser } from "@clerk/clerk-react";
 import { useNavigate } from "react-router";
 import { AiToolsData } from "../assets/assets";
 
 const AiTools = () => {
   const navigate = useNavigate();
-  const { user } = useUser();
 
   return (
     <div className="px-4 sm:px-20 xl:px-32 my-24">
@@ -25,7 +23,7 @@ const AiTools = () => {
           <div
             key={index}
             className="p-8 m-4 max-w-xs rounded-lg bg-[#FDFDFE] shadow-lg border border-gray-100 hover:-translate-y-1 transition-all duration-300 cursor-pointer"
-            onClick={() => user && navigate(tool.path)}
+            onClick={() => navigate(tool.path)}
           >
             <tool.Icon
               className="w-12 h-12 p-3 text-white rounded-xl"
