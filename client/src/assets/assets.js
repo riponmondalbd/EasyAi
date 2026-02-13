@@ -210,3 +210,14 @@ export const articleLength = [
   { length: 1200, text: "Medium (800-1200 words)" },
   { length: 1600, text: "Long (1200+ words)" },
 ];
+
+export const blogCategories = [
+  "General",
+  "Technology",
+  "Business",
+  "Health",
+  "Lifestyle",
+  "Education",
+  "Travel",
+  "Food",
+];
