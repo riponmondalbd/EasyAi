@@ -204,3 +204,9 @@ export const navItems = [
   { to: "/ai/review-resume", label: "Review Resume", Icon: FileText },
   { to: "/ai/community", label: "Community", Icon: Users },
 ];
+
+export const articleLength = [
+  { length: 800, text: "Short (500-800 words)" },
+  { length: 1200, text: "Medium (800-1200 words)" },
+  { length: 1600, text: "Long (1200+ words)" },
+];
