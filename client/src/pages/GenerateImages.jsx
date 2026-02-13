@@ -24,7 +24,9 @@ const GenerateImages = () => {
           <Sparkles className="w-6 text-[#00AD25]" />
           <h1 className="text-xl font-semibold">AI Image Generator</h1>
         </div>
+
         <p className="mt-6 text-sm font-medium">Describe Your Image</p>
+
         <textarea
           onChange={(e) => setInput(e.target.value)}
           value={input}
