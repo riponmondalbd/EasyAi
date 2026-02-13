@@ -39,13 +39,31 @@ const GenerateImages = () => {
           {imageStyle.map((item) => (
             <span
               onClick={() => setSelectedStyle(item)}
-              className={`text-sm px-4 py-1 border rounded-full cursor-pointer ${selectedStyle === item ? "bg-purple-50 text-purple-700" : "text-gray-500 border-gray-300"} `}
+              className={`text-sm px-4 py-1 border rounded-full cursor-pointer ${selectedStyle === item ? "bg-green-50 text-green-700" : "text-gray-500 border-gray-300"} `}
               key={item}
             >
               {item}
             </span>
           ))}
         </div>
+
+        {/* toggle to show or hide */}
+        <div className="my-6 flex items-center gap-2">
+          <label className="relative cursor-pointer">
+            <input
+              type="checkbox"
+              onChange={(e) => setPublish(e.target.value)}
+              checked={publish}
+              className="sr-only peer"
+            />
+
+            <div className="w-9 h-5 bg-slate-300 rounded-full peer-checked:bg-green-500 transition"></div>
+
+            <span className="absolute left-1 top-1 w-3 h-3 bg-white rounded-full transform peer-checked:translate-x-4"></span>
+          </label>
+          <p className="text-sm">Make this image public</p>
+        </div>
+
         <br />
         <button className="w-full flex justify-center items-center gap-2 bg-gradient-to-r from-[#00AD25] to-[#04FF50] text-white px-4 py-2 mt-6 text-sm rounded-lg cursor-pointer">
           <Image className="w-5" />
