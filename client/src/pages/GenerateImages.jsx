@@ -14,7 +14,7 @@ const GenerateImages = () => {
   return (
     <div className="h-full overflow-y-scroll p-6 flex items-start flex-wrap gap-4 text-slate-700">
       {/* left column */}
-      {/* AI article write */}
+      {/* AI Image Generator */}
       <form
         onSubmit={onSubmitHandler}
         className="w-full max-w-lg p-4 bg-white rounded-lg border border-gray-200"
@@ -52,7 +52,7 @@ const GenerateImages = () => {
           <label className="relative cursor-pointer">
             <input
               type="checkbox"
-              onChange={(e) => setPublish(e.target.value)}
+              onChange={(e) => setPublish(e.target.checked)}
               checked={publish}
               className="sr-only peer"
             />
@@ -71,7 +71,7 @@ const GenerateImages = () => {
         </button>
       </form>
       {/* right column */}
-      {/* Generated article */}
+      {/* Generated image */}
       <div className="w-full max-w-lg p-4 bg-white rounded-lg flex flex-col border border-gray-200 min-h-96 ">
         <div className="flex items-center gap-3">
           <Image className="w-5 h-5 text-[#00AD25]" />
