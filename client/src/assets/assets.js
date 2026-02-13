@@ -221,3 +221,13 @@ export const blogCategories = [
   "Travel",
   "Food",
 ];
+export const imageStyle = [
+  "Realistic",
+  "Ghibli style",
+  "Anime style",
+  "Cartoon style",
+  "Fantasy style",
+  "Realistic style",
+  "3D style",
+  "Portrait style",
+];
