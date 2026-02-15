@@ -13,3 +13,15 @@ export const getUserCreations = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
+
+// get all published creations
+export const getPublishedCreations = async (req, res) => {
+  try {
+    const creations =
+      await sql` SELECT * FROM creations WHERE published = true ORDER BY created_at DESC`;
+
+    res.json({ success: true, creations });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};
