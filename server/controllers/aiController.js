@@ -123,10 +123,8 @@ export const generateImage = async (req, res) => {
       "https://clipdrop-api.co/text-to-image/v1",
       formData,
       {
-        headers: {
-          "x-api-key": process.env.CLIP_DROP_API_KEY,
-        },
-        responseType: "arrayBuffer",
+        headers: { "x-api-key": process.env.CLIP_DROP_API_KEY },
+        responseType: "arraybuffer",
       },
     );
 
