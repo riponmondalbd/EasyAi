@@ -1,7 +1,9 @@
 import { clerkClient } from "@clerk/express";
 import axios from "axios";
 import { v2 as cloudinary } from "cloudinary";
+import fs from "fs";
 import OpenAI from "openai";
+import pdf from "pdf-parse/lib/pdf-parse.js";
 import sql from "../configs/db.js";
 
 const AI = new OpenAI({
@@ -190,7 +192,7 @@ export const removeImageObject = async (req, res) => {
       });
     }
 
-    // remove image background
+    // remove image object
     const { public_id } = await cloudinary.uploader.upload(image.path);
 
     const imageUrl = cloudinary.url(public_id, {
@@ -201,6 +203,56 @@ export const removeImageObject = async (req, res) => {
     await sql` INSERT INTO creations (user_id,prompt,content,type) VALUES (${userId},${`Remove ${object} from image`},${imageUrl},'image')`;
 
     res.json({ success: true, content: imageUrl });
+  } catch (error) {
+    console.log(error.message);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+// resume review
+export const resumeReview = async (req, res) => {
+  try {
+    const { userId } = req.auth();
+    const resume = req.file;
+    const plan = req.plan;
+
+    if (plan !== "premium") {
+      return res.json({
+        success: false,
+        message: "This features is only available for premium subscriptions",
+      });
+    }
+
+    // resume review
+    if (resume.size > 5 * 1024 * 1024) {
+      return res.json({
+        success: false,
+        message: "Resume file size is bigger than (5MB).",
+      });
+    }
+
+    const dataBuffer = fs.readFileSync(resume.path);
+    const pdfData = await pdf(dataBuffer);
+
+    const prompt = `Review the following resume and provide constructive feedback on its strengths, weakness, and areas for improvement. Resume Content:\n\n${pdfData.text}`;
+
+    const response = await AI.chat.completions.create({
+      model: process.env.GEMINI_MODEL,
+      messages: [
+        {
+          role: "user",
+          content: prompt,
+        },
+      ],
+      temperature: 0.7,
+      max_tokens: 1000,
+    });
+
+    const content = response.choices[0].message.content;
+
+    await sql` INSERT INTO creations (user_id,prompt,content,type) VALUES (${userId},'Review the uploaded resume',${content},'resume-review')`;
+
+    res.json({ success: true, content });
   } catch (error) {
     console.log(error.message);
     res.json({ success: false, message: error.message });
