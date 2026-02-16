@@ -3,6 +3,7 @@ import axios from "axios";
 import { Edit, Sparkles } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import Markdown from "react-markdown";
 import { articleLength } from "../assets/assets";
 
 axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
@@ -108,7 +109,9 @@ const WriteArticle = () => {
           </div>
         ) : (
           <div className="mt-3 h-full overflow-y-scroll text-sm text-slate-600">
-            <div className="">{content}</div>
+            <div className="reset-tw">
+              <Markdown>{content}</Markdown>
+            </div>
           </div>
         )}
       </div>
