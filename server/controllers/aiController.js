@@ -3,7 +3,8 @@ import axios from "axios";
 import { v2 as cloudinary } from "cloudinary";
 import fs from "fs";
 import OpenAI from "openai";
-import { PDFParse } from "pdf-parse";
+// import { PDFParse } from "pdf-parse";
+import pdf from "pdf-parse-new";
 import sql from "../configs/db.js";
 
 const AI = new OpenAI({
@@ -216,10 +217,27 @@ export const resumeReview = async (req, res) => {
     const resume = req.file;
     const plan = req.plan;
 
+    // Plan check
     if (plan !== "premium") {
       return res.json({
         success: false,
         message: "This features is only available for premium subscriptions",
+      });
+    }
+
+    // File exists check
+    if (!resume) {
+      return res.json({
+        success: false,
+        message: "No resume file uploaded",
+      });
+    }
+
+    // File type check
+    if (resume.mimetype !== "application/pdf") {
+      return res.json({
+        success: false,
+        message: "Only PDF resumes are allowed",
       });
     }
 
@@ -232,7 +250,8 @@ export const resumeReview = async (req, res) => {
     }
 
     const dataBuffer = fs.readFileSync(resume.path);
-    const pdfData = await PDFParse(dataBuffer);
+    // const pdfData = await new PDFParse(dataBuffer);
+    const pdfData = await pdf(dataBuffer);
 
     const prompt = `Review the following resume and provide constructive feedback on its strengths, weakness, and areas for improvement. Resume Content:\n\n${pdfData.text}`;
 
