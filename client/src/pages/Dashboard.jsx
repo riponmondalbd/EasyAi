@@ -35,7 +35,7 @@ const Dashboard = () => {
     getDashboardData();
   }, []);
 
-  return !loading ? (
+  return (
     <div className="h-full overflow-y-scroll p-6">
       {/* cards (total creation & active plan) */}
       <div className="flex justify-start gap-4 flex-wrap">
@@ -67,18 +67,20 @@ const Dashboard = () => {
       </div>
 
       {/* recent creations */}
-      <div className="space-y-3">
-        <p className="mt-6 mb-4">Recent Creations</p>
+      {loading ? (
+        <div className="flex justify-center items-center h-full">
+          <span className="w-10 h-10 my-1 rounded-full border-3 border-primary border-t-transparent animate-spin"></span>
+        </div>
+      ) : (
+        <div className="space-y-3">
+          <p className="mt-6 mb-4">Recent Creations</p>
 
-        {/* list of creations */}
-        {creations.map((item) => (
-          <CreationItem key={item.id} item={item} />
-        ))}
-      </div>
-    </div>
-  ) : (
-    <div className="flex justify-center items-center h-full">
-      <span className="w-10 h-10 my-1 rounded-full border-3 border-primary border-t-transparent animate-spin"></span>
+          {/* list of creations */}
+          {creations.map((item) => (
+            <CreationItem key={item.id} item={item} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
