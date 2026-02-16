@@ -68,8 +68,8 @@ const Dashboard = () => {
 
       {/* recent creations */}
       {loading ? (
-        <div className="flex justify-center items-center h-full">
-          <span className="w-10 h-10 my-1 rounded-full border-3 border-primary border-t-transparent animate-spin"></span>
+        <div className="flex justify-center items-center h-3/4">
+          <span className="w-11 h-11 rounded-full border-3 border-primary border-t-transparent animate-spin"></span>
         </div>
       ) : (
         <div className="space-y-3">
