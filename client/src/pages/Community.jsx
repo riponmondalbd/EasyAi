@@ -13,6 +13,7 @@ const Community = () => {
 
   const { getToken } = useAuth();
 
+  // show all creations
   const fetchCreations = async () => {
     try {
       setLoading(true);
@@ -22,7 +23,6 @@ const Community = () => {
 
       if (data.success) {
         setCreations(data.creations);
-        console.log(data.creations);
       } else {
         toast.error(data.message);
       }
@@ -30,6 +30,28 @@ const Community = () => {
       toast.error(error.message);
     }
     setLoading(false);
+  };
+
+  // image like toggle
+  const imageLikeToggle = async (id) => {
+    try {
+      const { data } = await axios.post(
+        "/api/user/toggle-like-creations",
+        { id },
+        {
+          headers: { Authorization: `Bearer ${await getToken()}` },
+        },
+      );
+
+      if (data.success) {
+        toast.success(data.message);
+        await fetchCreations();
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   useEffect(() => {
@@ -60,6 +82,7 @@ const Community = () => {
               <div className="flex gap-1 items-center">
                 <p>{creation.likes.length}</p>
                 <Heart
+                  onClick={() => imageLikeToggle(creation.id)}
                   className={`min-w-5 h-5 hover:scale-110 cursor-pointer ${creation.likes.includes(user.id) ? "fill-red-500 text-red-600" : "text-white"}`}
                 />
               </div>
