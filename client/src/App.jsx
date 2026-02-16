@@ -1,5 +1,4 @@
-import { useAuth } from "@clerk/clerk-react";
-import { useEffect } from "react";
+import { Toaster } from "react-hot-toast";
 import { Route, Routes } from "react-router";
 import BlogTitles from "./pages/BlogTitles";
 import Community from "./pages/Community";
@@ -13,13 +12,9 @@ import ReviewResume from "./pages/ReviewResume";
 import WriteArticle from "./pages/WriteArticle";
 
 const App = () => {
-  const { getToken } = useAuth();
-  useEffect(() => {
-    getToken().then((token) => console.log(token));
-  }, []);
-
   return (
     <div>
+      <Toaster />
       <Routes>
         <Route path="/" element={<Home />} />
         {/* nested routing for ai */}

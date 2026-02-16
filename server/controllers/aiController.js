@@ -3,7 +3,7 @@ import axios from "axios";
 import { v2 as cloudinary } from "cloudinary";
 import fs from "fs";
 import OpenAI from "openai";
-import pdf from "pdf-parse/lib/pdf-parse.js";
+import { PDFParse } from "pdf-parse";
 import sql from "../configs/db.js";
 
 const AI = new OpenAI({
@@ -232,7 +232,7 @@ export const resumeReview = async (req, res) => {
     }
 
     const dataBuffer = fs.readFileSync(resume.path);
-    const pdfData = await pdf(dataBuffer);
+    const pdfData = await PDFParse(dataBuffer);
 
     const prompt = `Review the following resume and provide constructive feedback on its strengths, weakness, and areas for improvement. Resume Content:\n\n${pdfData.text}`;
 
