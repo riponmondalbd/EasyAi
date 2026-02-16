@@ -9,7 +9,7 @@ axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 const Community = () => {
   const [creations, setCreations] = useState([]);
   const { user } = useUser();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const { getToken } = useAuth();
 
