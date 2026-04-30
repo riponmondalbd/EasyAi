@@ -198,3 +198,7 @@ npm run dev
 ## License
 
 This project currently does not specify a license.
+
+---
+
+Developed by [Ripon](https://riponmondalbd.vercel.app)
